@@ -1,16 +1,3 @@
-"""
-Translate source strings using MADLAD-400 (Google, open-source).
-
-Runs locally on GPU/CPU. No API key needed.
-
-Usage:
-    python scripts/translate_madlad400.py --lang de
-    python scripts/translate_madlad400.py --lang all
-    python scripts/translate_madlad400.py --lang all --model 3B
-    
-Requires: pip install transformers torch sentencepiece accelerate
-"""
-
 import argparse
 import torch
 from pathlib import Path
@@ -34,7 +21,7 @@ MODELS = {
     '10B': 'google/madlad400-10b-mt'
 }
 
-def translate_madlad(model, tokenizer, texts, target_lang_tag, device, batch_size=32):
+def translate_madlad(model, tokenizer, texts, target_lang_tag, device, batch_size=16):
     translations = []
     for i in tqdm(range(0, len(texts), batch_size), desc=f'MADLAD en->{target_lang_tag}'):
         batch = texts[i:i + batch_size]
@@ -44,10 +31,20 @@ def translate_madlad(model, tokenizer, texts, target_lang_tag, device, batch_siz
                           max_length=512).to(device)
 
         with torch.no_grad():
-            generated = model.generate(**inputs, max_new_tokens=256)
+            # Enforce greedy decoding to match NLLB-200 / IndicTrans2 methodology
+            generated = model.generate(
+                **inputs, 
+                max_new_tokens=256,
+                num_beams=1,
+                do_sample=False
+            )
 
         decoded = tokenizer.batch_decode(generated, skip_special_tokens=True)
         translations.extend(decoded)
+        
+        # Free memory aggressively after each batch
+        del inputs, generated
+        torch.cuda.empty_cache()
 
     return translations
 
@@ -55,17 +52,22 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--lang', default='all')
     parser.add_argument('--model', default='3B', choices=['3B', '7B', '10B'])
-    parser.add_argument('--batch-size', type=int, default=32)
+    parser.add_argument('--batch-size', type=int, default=16)
     args = parser.parse_args()
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     print(f"Device: {device}")
 
     model_name = MODELS[args.model]
-    print(f"Loading model: {model_name}...")
+    print(f"Loading model: {model_name} in float16...")
     
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForSeq2SeqLM.from_pretrained(model_name).to(device)
+    
+    # LOAD IN FP16 TO PREVENT OOM
+    model = AutoModelForSeq2SeqLM.from_pretrained(
+        model_name, 
+        torch_dtype=torch.float16
+    ).to(device)
     model.eval()
     print("Model loaded.")
 
