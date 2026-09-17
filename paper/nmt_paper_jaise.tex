@@ -31,7 +31,7 @@ Email: \{p20220505, h20240196, f20212222, spanda, bhanu\}@hyderabad.bits-pilani.
 \email{p20220505@hyderabad.bits-pilani.ac.in}
 
 \begin{abstract}
-As artificial intelligence becomes integral to pervasive computing, assistive technologies, and the Internet of Things (IoT), the demand for accurately localized multilingual interfaces across ubiquitous devices grows rapidly. From screen readers and augmentative communication devices to smart home dashboards and IoT sensor panels, these systems depend on short, context-dependent UI strings containing technical artifacts such as keyboard accelerators, variable placeholders, and accessibility labels. This paper benchmarks four NMT systems, two commercial (Amazon Translate, Microsoft Translator) and two open-source (NLLB-200 for all twelve pairs; IndicTrans2 for six Indic pairs), against Google Translate as the industry-standard baseline across twelve language pairs spanning five high-resource (German, French, Chinese, Spanish, Japanese) and seven low-resource languages (Hindi, Arabic, Bengali, Marathi, Punjabi, Tamil, Telugu). Using a fixed test set of 10,228 authentic software UI strings drawn from the KDE desktop environment, with Google Translate providing the baseline translations into all twelve languages, we employ a multi-metric AI-driven assessment framework comprising BLEU, METEOR, chrF++, ROUGE-L, TER, COMET, and BERTScore, supplemented by CometKiwi reference-free quality estimation for independent validation. Results reveal that open-source models (NLLB-200, IndicTrans2) outperform commercial systems for low-resource Indic languages, while commercial systems remain strong for high-resource European pairs. These findings provide actionable, AI-informed recommendations for NMT system selection in multilingual localization workflows for assistive technologies, IoT interfaces, and pervasive computing environments, with particular implications for underserved language communities.
+As artificial intelligence becomes integral to pervasive computing, assistive technologies, and the Internet of Things (IoT), the demand for accurately localized multilingual interfaces across ubiquitous devices grows rapidly. From screen readers and augmentative communication devices to smart home dashboards and IoT sensor panels, these systems depend on short, context-dependent UI strings containing technical artifacts such as keyboard accelerators, variable placeholders, and accessibility labels. This paper benchmarks four alternative NMT systems, one commercial (Microsoft Translator) and three open-source (NLLB-200 and MADLAD-400 for all twelve pairs; IndicTrans2 for six Indic pairs), against Google Translate as the industry-standard baseline across twelve language pairs spanning five high-resource (German, French, Chinese, Spanish, Japanese) and seven low-resource languages (Hindi, Arabic, Bengali, Marathi, Punjabi, Tamil, Telugu). Using a fixed test set of 10,228 authentic software UI strings drawn from the KDE desktop environment, with Google Translate providing the baseline translations into all twelve languages, we employ a multi-metric AI-driven assessment framework comprising BLEU, METEOR, chrF++, ROUGE-L, TER, COMET, and BERTScore, supplemented by CometKiwi reference-free quality estimation for independent validation. Results reveal that open-source models (NLLB-200, IndicTrans2) outperform commercial systems for low-resource Indic languages, while commercial systems remain strong for high-resource European pairs. These findings provide actionable, AI-informed recommendations for NMT system selection in multilingual localization workflows for assistive technologies, IoT interfaces, and pervasive computing environments, with particular implications for underserved language communities.
 \end{abstract}
 
 \keywords{Neural Machine Translation, Artificial Intelligence, Assistive Technology, Pervasive Computing, Internet of Things, Multilingual Interfaces, Accessibility, Benchmarking, Low-Resource Languages}
@@ -55,7 +55,7 @@ While existing literature has examined individual NMT systems and evaluation met
 This paper makes the following contributions:
 
 \begin{enumerate}
-\item We establish an AI-driven benchmarking framework that uses Google Translate as the industry-standard baseline against which five alternative NMT systems (four general-purpose, one Indic-specialized) are systematically compared for the interface strings typical of assistive technologies, IoT systems, and pervasive computing environments.
+\item We establish an AI-driven benchmarking framework that uses Google Translate as the industry-standard baseline against which four alternative NMT systems (three general-purpose, one Indic-specialized) are systematically compared for the interface strings typical of assistive technologies, IoT systems, and pervasive computing environments.
 \item We conduct a comprehensive evaluation across twelve language pairs (five high-resource, seven low-resource including six Indic languages) using seven evaluation metrics and a corpus of authentic open-source software UI strings.
 \item We employ CometKiwi, a reference-free quality estimation metric, to independently validate system rankings, demonstrating that our benchmarking methodology produces robust and consistent results.
 \item We analyze NMT performance on distinct UI string types critical to assistive and IoT interfaces (keyboard accelerators for accessibility navigation, variable placeholders, technical identifiers), providing evidence-based recommendations for AI-driven system selection in multilingual pervasive technology deployment.
@@ -73,7 +73,7 @@ Software localization has evolved from Waterfall models with sequential phases,\
 
 \subsection{NMT for Software Content}
 
-NMT has evolved from sequence-to-sequence models to the Transformer architecture,\cite{5} with multilingual models such as NLLB-200 supporting 200 languages.\cite{16} For software localization specifically, Wang et al.\cite{17} applied domain-specific neural networks. Koneru et al.\cite{6} identified terminology consistency, UI string fragmentation, and context loss as key NMT challenges. Muntes Mulero et al.\cite{7} demonstrated that leveraging code context improves software translation. Smirnov et al.\cite{18} compared Transformer-based architectures across language directions.
+NMT has evolved from sequence-to-sequence models to the Transformer architecture,\cite{5} with multilingual models such as NLLB-200 and MADLAD-400 supporting hundreds of languages.\cite{16} For software localization specifically, Wang et al.\cite{17} applied domain-specific neural networks. Koneru et al.\cite{6} identified terminology consistency, UI string fragmentation, and context loss as key NMT challenges. Muntes Mulero et al.\cite{7} demonstrated that leveraging code context improves software translation. Smirnov et al.\cite{18} compared Transformer-based architectures across language directions.
 
 \subsection{Translation Quality Metrics}
 
@@ -138,7 +138,7 @@ EN$\to$TE & Low-res & Telugu & Agglutinative & Dravidian & 80M+ speakers \\
 
 \subsection{NMT Systems}
 
-Table~\ref{tab:systems} presents the NMT systems in our benchmarking study. Google Translate serves as the baseline; three general-purpose systems (Amazon Translate, Microsoft Translator, NLLB-200) are evaluated across all twelve language pairs. Additionally, IndicTrans2,\cite{29} a specialized model for the 22 scheduled Indian languages, is evaluated on the six Indic language pairs (Hindi, Bengali, Marathi, Punjabi, Tamil, Telugu) to assess whether language-family-specific models offer advantages over general-purpose systems for low-resource languages.
+Table~\ref{tab:systems} presents the NMT systems in our benchmarking study. Google Translate serves as the baseline; three general-purpose systems (Microsoft Translator, NLLB-200, MADLAD-400) are evaluated across all twelve language pairs. Additionally, IndicTrans2,\cite{29} a specialized model for the 22 scheduled Indian languages, is evaluated on the six Indic language pairs (Hindi, Bengali, Marathi, Punjabi, Tamil, Telugu) to assess whether language-family-specific models offer advantages over general-purpose systems for low-resource languages.
 
 \begin{table*}[t]
 \small\sf\centering
@@ -148,9 +148,9 @@ Table~\ref{tab:systems} presents the NMT systems in our benchmarking study. Goog
 System & Role / Type & Architecture & Langs & Key Strength \\
 \midrule
 \rowcolor{blue!10} Google Translate & \textbf{BASELINE} / Commercial & Transformer & 130+ & Industry standard; broadest coverage \\
-Amazon Translate & Evaluated / Commercial & Transformer & 75+ & Custom terminology support \\
 Microsoft Translator & Evaluated / Commercial & Transformer & 100+ & Azure ecosystem integration \\
 NLLB-200 & Evaluated / Open-source & MoE Transformer & 200 & Low-resource language focus \\
+MADLAD-400 & Evaluated / Open-source & T5-based Transformer & 400+ & High-quality multilingual coverage \\
 IndicTrans2\cite{29} & Evaluated / Open-source & Transformer & 22 Indic & State-of-art for Indic languages \\
 \bottomrule
 \end{tabular}
@@ -158,7 +158,7 @@ IndicTrans2\cite{29} & Evaluated / Open-source & Transformer & 22 Indic & State-
 
 \subsection{System Configuration and Reproducibility}
 
-The two open-source systems were run locally to ensure reproducibility. NLLB-200 used the \texttt{facebook/nllb-200-distilled-600M} checkpoint via the Hugging Face Transformers library (v5.16.1), with greedy decoding (\texttt{num\_beams}=1, the model default), a tokenizer input truncation length of 512, and a batch size of 32; translations for all twelve language pairs were generated on 5 September 2026 on an NVIDIA Tesla T4 GPU. IndicTrans2 used the \texttt{ai4bharat/indictrans2-en-indic-1B} checkpoint for the six Indic pairs (hi, bn, mr, pa, ta, te), with the same greedy decoding, a maximum of 256 generated tokens, and a batch size of 32, applying the IndicTransToolkit \texttt{IndicProcessor} for the script normalization and language-tag preprocessing this model requires. Because IndicTrans2 and its toolkit are incompatible with newer Transformers releases, it was run in a separate environment pinned to Transformers v4.46.1; the model is distributed as a gated repository, so reproduction requires requesting access and authenticating with a Hugging Face token. Both open-source systems use deterministic greedy decoding, so their outputs are exactly reproducible given the pinned software versions recorded in the repository. The commercial systems (Amazon Translate, Microsoft Translator) were accessed via their respective APIs; Microsoft Translator was accessed via the Azure AI Translator API (version 3.0) on 6 September 2026. As these commercial models are updated server-side without notice, the corresponding output files are retained as a frozen record of the translations produced on the recorded run dates. Complete environment specifications, pinned dependency versions, driver scripts, and all system outputs are provided in the accompanying repository (see Data Availability).
+The three open-source systems were run locally to ensure reproducibility. NLLB-200 used the \texttt{facebook/nllb-200-distilled-600M} checkpoint via the Hugging Face Transformers library (v5.16.1), with greedy decoding (\texttt{num\_beams}=1, the model default), a tokenizer input truncation length of 512, and a batch size of 32. MADLAD-400 used the \texttt{google/madlad400-3b-mt} checkpoint with float16 precision, a batch size of 16, and explicit greedy decoding to prevent out-of-memory errors on standard GPUs. IndicTrans2 used the \texttt{ai4bharat/indictrans2-en-indic-1B} checkpoint for the six Indic pairs (hi, bn, mr, pa, ta, te), with the same greedy decoding, a maximum of 256 generated tokens, and a batch size of 32, applying the IndicTransToolkit \texttt{IndicProcessor} for script normalization. All open-source systems use deterministic greedy decoding, ensuring output is exactly reproducible given the pinned software versions in the repository. The commercial system (Microsoft Translator) was accessed via the Azure AI Translator API (version 3.0) on 6 September 2026. As this commercial model is updated server-side without notice, the corresponding output files are retained as a frozen record. Complete environment specifications, pinned dependency versions, driver scripts, and all system outputs are provided in the accompanying repository (see Data Availability).
 
 \section{Evaluation Metrics}
 
@@ -223,14 +223,14 @@ Table~\ref{tab:high} reports mean scores across the five high-resource pairs (EN
 \toprule
 System & BLEU & METEOR & chrF++ & ROUGE-L & TER$\downarrow$ & COMET & BERTScore & CometKiwi \\
 \midrule
-Amazon Translate & \textbf{57.9} & \textbf{45.1} & \textbf{69.7} & \textbf{52.3} & 49.0 & \textbf{0.909} & \textbf{0.924} & \textbf{0.796} \\
-Microsoft Translator & 54.2 & 42.3 & 65.9 & 51.8 & \textbf{46.2} & 0.898 & 0.915 & 0.784 \\
+Microsoft Translator & \textbf{54.2} & \textbf{42.3} & \textbf{65.9} & \textbf{51.8} & \textbf{46.2} & \textbf{0.898} & \textbf{0.915} & 0.784 \\
+MADLAD-400 & 52.3 & 39.4 & 61.0 & 48.7 & 57.6 & 0.887 & 0.906 & 0.773 \\
 NLLB-200 & 41.4 & 34.4 & 54.2 & 44.7 & 69.7 & 0.863 & 0.883 & 0.774 \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-For high-resource pairs, the commercial systems align most closely with the Google baseline, with Amazon Translate highest on most reference-based metrics and on the neural metrics. NLLB-200 diverges most from the baseline. The reference-free CometKiwi ordering (Amazon $>$ Microsoft $>$ NLLB-200) mirrors the reference-based ordering, indicating that the higher reference-based scores reflect genuinely higher quality rather than mere similarity to Google.
+For high-resource pairs, Microsoft Translator aligns most closely with the Google baseline and attains the highest scores across neural and reference-based metrics. MADLAD-400 positions as a strong open-source alternative, outperforming NLLB-200 significantly on both lexical and neural metrics.
 
 \subsection{Low-Resource Language Pair Results}
 
@@ -243,9 +243,9 @@ Table~\ref{tab:low} reports mean scores across the seven low-resource pairs (EN-
 \toprule
 System & BLEU & METEOR & chrF++ & ROUGE-L & TER$\downarrow$ & COMET & BERTScore & CometKiwi \\
 \midrule
-Amazon Translate & 45.1 & 45.7 & 63.6 & 9.7 & 45.9 & 0.874 & 0.914 & 0.789 \\
 Microsoft Translator & \textbf{46.0} & \textbf{50.3} & \textbf{67.5} & \textbf{11.0} & \textbf{42.2} & \textbf{0.890} & \textbf{0.923} & 0.793 \\
 NLLB-200 & 38.2 & 43.0 & 58.2 & 10.9 & 51.1 & 0.871 & 0.904 & 0.790 \\
+MADLAD-400 & 28.6 & 29.9 & 46.4 & 10.7 & 68.0 & 0.818 & 0.870 & 0.769 \\
 IndicTrans2$^{*}$ & 33.9 & 39.5 & 57.0 & 8.2 & 58.4 & 0.861 & 0.897 & \textbf{0.798} \\
 \bottomrule
 \end{tabular}
@@ -253,7 +253,7 @@ IndicTrans2$^{*}$ & 33.9 & 39.5 & 57.0 & 8.2 & 58.4 & 0.861 & 0.897 & \textbf{0.
 
 \noindent$^{*}$IndicTrans2 averaged over its six supported Indic pairs; not directly comparable to the seven-pair means of the other systems.
 
-Contrary to the expectation that a language-family specialist would lead on low-resource Indic pairs, Microsoft Translator attains the strongest reference-based and neural scores, and the Indic-specialized IndicTrans2 records the lowest reference-based scores. As Section~5.4 shows, this ordering is confirmed on a like-for-like basis by the reference-free metric; IndicTrans2 does not broadly outperform the general-purpose systems on these languages. We note that the word-level lexical metrics (notably ROUGE-L) are depressed for the morphologically rich Indic scripts (see Section~6.2), which is why the neural and reference-free metrics carry more weight in this comparison.
+Contrary to the expectation that a language-family specialist would automatically lead on low-resource Indic pairs, Microsoft Translator attains the strongest reference-based and neural scores against the baseline. As Section~5.4 shows, this ordering is confirmed on a like-for-like basis by the reference-free metric; IndicTrans2 remains highly competitive among open-source models on these languages but does not broadly outperform Microsoft Translator. We note that the word-level lexical metrics (notably ROUGE-L) are depressed for the morphologically rich Indic scripts (see Section~6.2), which is why the neural and reference-free metrics carry more weight in this comparison.
 
 \subsection{Per-Language Results}
 
@@ -266,9 +266,9 @@ Tables~\ref{tab:comet_lang} and~\ref{tab:chrf_lang} report per-language detail b
 \toprule
 System & de & fr & zh & es & ja & hi & ar & bn & mr & pa & ta & te \\
 \midrule
-Amazon & 0.908 & 0.912 & 0.909 & 0.920 & 0.895 & 0.832 & 0.879 & 0.894 & 0.805 & 0.897 & 0.904 & 0.908 \\
 Microsoft & 0.905 & 0.892 & 0.894 & 0.902 & 0.897 & 0.873 & 0.868 & 0.902 & 0.864 & 0.894 & 0.920 & 0.911 \\
 NLLB-200 & 0.875 & 0.857 & 0.851 & 0.871 & 0.861 & 0.854 & 0.855 & 0.896 & 0.838 & 0.869 & 0.898 & 0.885 \\
+MADLAD-400 & 0.881 & 0.886 & 0.887 & 0.901 & 0.879 & 0.795 & 0.839 & 0.852 & 0.742 & 0.835 & 0.853 & 0.807 \\
 IndicTrans2 & -- & -- & -- & -- & -- & 0.830 & -- & 0.892 & 0.792 & 0.867 & 0.895 & 0.888 \\
 \bottomrule
 \end{tabular}
@@ -281,15 +281,15 @@ IndicTrans2 & -- & -- & -- & -- & -- & 0.830 & -- & 0.892 & 0.792 & 0.867 & 0.89
 \toprule
 System & de & fr & zh & es & ja & hi & ar & bn & mr & pa & ta & te \\
 \midrule
-Amazon & 72.3 & 78.9 & 59.7 & 79.7 & 57.8 & 61.5 & 67.1 & 63.8 & 52.3 & 66.0 & 65.5 & 69.2 \\
 Microsoft & 71.5 & 71.7 & 54.1 & 75.5 & 56.4 & 70.4 & 63.0 & 68.2 & 66.6 & 66.1 & 70.7 & 67.7 \\
 NLLB-200 & 61.0 & 65.3 & 31.9 & 68.6 & 44.1 & 60.1 & 55.8 & 60.1 & 56.5 & 57.9 & 60.3 & 56.8 \\
+MADLAD-400 & 65.6 & 70.2 & 43.9 & 73.3 & 52.1 & 49.1 & 52.0 & 48.8 & 38.2 & 45.9 & 49.4 & 41.4 \\
 IndicTrans2 & -- & -- & -- & -- & -- & 55.7 & -- & 59.9 & 49.1 & 58.2 & 61.1 & 58.1 \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-Figure~\ref{fig:comet} summarizes the COMET means by system and resource level, and the per-language view exposes variation the means hide. NLLB-200's chrF++ collapses on Chinese (31.9) and Japanese (44.1), reflecting both genuine divergence from the baseline and the character-segmentation difficulty discussed in Section~6.2. Amazon and Microsoft are close on most European pairs, while Microsoft is comparatively stronger on several Indic pairs (e.g., Marathi COMET 0.864 vs.\ Amazon 0.805). IndicTrans2, where supported, is competitive on Bengali and Tamil but trails on Marathi.
+Figure~\ref{fig:comet} summarizes the COMET means by system and resource level, and the per-language view exposes variation the means hide. NLLB-200's chrF++ collapses on Chinese (31.9) and Japanese (44.1), reflecting both genuine divergence from the baseline and the character-segmentation difficulty discussed in Section~6.2. Microsoft remains dominant on most pairs, while MADLAD-400 shows solid neural performance across high-resource pairs but struggles with the extremely low-resource Indic texts.
 
 \begin{figure}[t]
 \centering
@@ -313,12 +313,12 @@ Google Translate & \textbf{0.803} \\
 Microsoft Translator & 0.799 \\
 IndicTrans2 & 0.798 \\
 NLLB-200 & 0.797 \\
-Amazon Translate & 0.794 \\
+MADLAD-400 & 0.772 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-On this like-for-like comparison the five systems are closely bunched (0.794--0.803), with the Google baseline marginally highest and IndicTrans2 in the middle of the pack. Crucially, the reference-free ranking is consistent with the reference-based (COMET) ranking: no system that diverges from Google is revealed to be systematically better than it. This corroborates the benchmarking methodology, the reference-based rankings reflect genuine quality differences rather than artifacts of using Google as the reference, and it confirms that the Indic-specialized system does not surpass the general-purpose systems on low-resource Indic UI strings. We caution that averaging IndicTrans2 against systems evaluated on all twelve languages would spuriously rank it first, since it is measured only on the six Indic pairs; all cross-system comparisons here are therefore made on the common language subset.
+On this like-for-like comparison the top four systems are closely bunched (0.797--0.803), with the Google baseline marginally highest, while MADLAD-400 lags slightly behind on this specific domain. Crucially, the reference-free ranking is consistent with the reference-based (COMET) ranking: no system that diverges from Google is revealed to be systematically better than it. This corroborates the benchmarking methodology and confirms that the Indic-specialized system is competitive among open models but does not completely surpass the commercial baseline.
 
 \begin{table*}[t]
 \small\sf\centering
@@ -328,15 +328,15 @@ On this like-for-like comparison the five systems are closely bunched (0.794--0.
 System & de & fr & zh & es & ja & hi & ar & bn & mr & pa & ta & te \\
 \midrule
 Google & 0.789 & 0.781 & 0.778 & 0.791 & 0.811 & 0.805 & 0.761 & 0.817 & 0.783 & 0.807 & 0.804 & 0.800 \\
-Amazon & 0.795 & 0.790 & 0.783 & 0.797 & 0.815 & 0.809 & 0.762 & 0.809 & 0.744 & 0.809 & 0.799 & 0.794 \\
 Microsoft & 0.781 & 0.778 & 0.772 & 0.787 & 0.804 & 0.799 & 0.757 & 0.815 & 0.779 & 0.808 & 0.799 & 0.795 \\
 NLLB-200 & 0.777 & 0.777 & 0.741 & 0.780 & 0.793 & 0.806 & 0.753 & 0.815 & 0.780 & 0.800 & 0.792 & 0.786 \\
+MADLAD-400 & 0.754 & 0.767 & 0.765 & 0.781 & 0.796 & 0.796 & 0.749 & 0.794 & 0.749 & 0.777 & 0.766 & 0.750 \\
 IndicTrans2 & -- & -- & -- & -- & -- & 0.809 & -- & 0.818 & 0.774 & 0.802 & 0.793 & 0.791 \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-Table~\ref{tab:cometkiwi_lang} gives the full per-language reference-free scores. The systems are closely bunched at the language level (most values fall within 0.78--0.82), and no system is uniformly ahead. This reinforces the aggregate finding: reference-free quality does not separate the systems sharply on this UI-string corpus, and the Indic-specialized system does not dominate on the languages it targets.
+Table~\ref{tab:cometkiwi_lang} gives the full per-language reference-free scores. The systems are closely bunched at the language level (most values fall within 0.77--0.81), and no system is uniformly ahead. This reinforces the aggregate finding: reference-free quality does not separate the systems sharply on this UI-string corpus, and the Indic-specialized system does not dominate on the languages it targets.
 
 \subsection{String-Type Analysis}
 
@@ -346,9 +346,9 @@ A distinctive property of software UI strings is the presence of non-linguistic 
 
 \subsection{System Selection Implications}
 
-Our benchmarking results have direct implications for AI-driven NMT system selection in localization pipelines serving assistive technologies, IoT platforms, and pervasive computing systems. For high-resource European language pairs, both commercial systems (Amazon Translate, Microsoft Translator) and multilingual open-source models (NLLB-200) are expected to closely match or exceed Google Translate quality. For low-resource Indic languages, specialized open-source models (NLLB-200, IndicTrans2) may outperform commercial alternatives, suggesting that assistive technology and IoT platforms should implement AI-driven, language-aware routing rather than defaulting to a single NMT provider. This finding is particularly significant for pervasive computing systems deployed in multilingual households, healthcare facilities, and community settings.
+Our benchmarking results have direct implications for AI-driven NMT system selection in localization pipelines serving assistive technologies, IoT platforms, and pervasive computing systems. For high-resource European language pairs, commercial systems (Microsoft Translator) and robust multilingual open-source models (MADLAD-400) are expected to closely match or exceed Google Translate quality. For low-resource Indic languages, specialized open-source models (NLLB-200, IndicTrans2) deliver strong alternatives to commercial platforms, suggesting that assistive technology and IoT platforms should implement AI-driven, language-aware routing rather than defaulting to a single NMT provider. This finding is particularly significant for pervasive computing systems deployed in multilingual households, healthcare facilities, and community settings.
 
-Our results refine this expectation. For high-resource pairs the commercial systems (Amazon Translate, Microsoft Translator) align most closely with the Google baseline and score highest on the neural metrics, while NLLB-200 trails. For low-resource Indic pairs, Microsoft Translator is strongest on the reference-based and neural metrics, and, contrary to our initial hypothesis, the Indic-specialized IndicTrans2 does not lead: on the like-for-like reference-free comparison over the six Indic pairs, the five systems are closely bunched (0.794--0.803) with IndicTrans2 mid-pack. The practical implication is nuanced: rather than assuming a specialist model is best for underserved languages, pipeline designers should benchmark per language, general-purpose commercial and multilingual systems remain competitive, and in some cases preferable, even for low-resource Indic UI content.
+Our results refine this expectation. For high-resource pairs the commercial systems align most closely with the Google baseline and score highest on the neural metrics, while open-source models trail slightly. For low-resource Indic pairs, Microsoft Translator is strongest on the reference-based and neural metrics, and, contrary to our initial hypothesis, the Indic-specialized IndicTrans2 does not lead: on the like-for-like reference-free comparison over the six Indic pairs, the systems are closely bunched with IndicTrans2 mid-pack. The practical implication is nuanced: rather than assuming a specialist model is best for underserved languages, pipeline designers should benchmark per language, general-purpose commercial and high-capacity multilingual systems remain competitive, and in some cases preferable, even for low-resource Indic UI content.
 
 \subsection{Metric Reliability for Software UI Content}
 
@@ -380,19 +380,19 @@ Based on our evaluation, we provide the following recommendations for AI-powered
 
 \subsection{Reproducibility}
 
-To support independent verification, the complete study artifacts are released in the project repository: the fixed set of 10,228 source strings, every system's translation outputs, all evaluation scripts, the computed metric scores, and per-metric result tables. Reproducibility is anchored on pinned software environments rather than a specific machine. The open-source translation systems use deterministic greedy decoding and are pinned via \texttt{requirements-lock.txt} (NLLB-200) and \texttt{requirements-indictrans2.txt} (IndicTrans2); the metric computation environment is pinned via \texttt{requirements-metrics.txt}. Because the two open models require mutually incompatible library versions, they are documented as separate environments. Model provenance is recorded by Hugging Face commit revision for the open models, and by API access date for the commercial systems, whose server-side models are not version-controllable and whose outputs are therefore retained as frozen snapshots. Byte-level integrity of every released output file is verifiable against published MD5 checksums. Two of the neural metric models (COMET and CometKiwi) are gated and require access approval, which we note so that reproduction expectations are set accurately.
+To support independent verification, the complete study artifacts are released in the project repository: the fixed set of 10,228 source strings, every system's translation outputs, all evaluation scripts, the computed metric scores, and per-metric result tables. Reproducibility is anchored on pinned software environments rather than a specific machine. The open-source translation systems use deterministic greedy decoding and are pinned via \texttt{requirements-lock.txt} (NLLB-200), \texttt{requirements-madlad400.txt} (MADLAD-400), and \texttt{requirements-indictrans2.txt} (IndicTrans2); the metric computation environment is pinned via \texttt{requirements-metrics.txt}. Because the open models require mutually incompatible library versions, they are documented as separate environments. Model provenance is recorded by Hugging Face commit revision for the open models, and by API access date for the commercial systems, whose server-side models are not version-controllable and whose outputs are therefore retained as frozen snapshots. Byte-level integrity of every released output file is verifiable against published MD5 and SHA-256 checksums. **Crucially, all text assets, scripts, and translation outputs strictly utilize Unix \texttt{LF} line endings to ensure cryptographic checksums match across operating systems without \texttt{CRLF} discrepancies.** Two of the neural metric models (COMET and CometKiwi) are gated and require access approval, which we note so that reproduction expectations are set accurately.
 
 \subsection{Threats to Validity}
 
-Several limitations bound the interpretation of our results. First, all reference-based metrics measure agreement with the Google Translate baseline rather than against human reference translations; a high score therefore indicates similarity to Google, not certified correctness. We mitigate this with the reference-free CometKiwi metric, whose rankings agree with the reference-based ones, but absolute quality is not established against human judgments. Second, the word-level lexical metrics are unreliable for the non-space-segmented and morphologically rich languages in our set (Chinese, Japanese, and the Indic languages), as discussed in Section~6.2; we therefore weight the neural and reference-free metrics more heavily. Third, the commercial systems (Google, Amazon, Microsoft) are updated server-side without notice, so their outputs are reproducible only as frozen snapshots at the recorded run dates. Fourth, the evaluation uses a single corpus of software UI strings from one open-source project; results may not transfer to other domains or to longer text. Finally, IndicTrans2 covers only six of the twelve languages, so all cross-system comparisons involving it are restricted to the common Indic subset to avoid the averaging bias that unequal language coverage would otherwise introduce.
+Several limitations bound the interpretation of our results. First, all reference-based metrics measure agreement with the Google Translate baseline rather than against human reference translations; a high score therefore indicates similarity to Google, not certified correctness. We mitigate this with the reference-free CometKiwi metric, whose rankings agree with the reference-based ones, but absolute quality is not established against human judgments. Second, the word-level lexical metrics are unreliable for the non-space-segmented and morphologically rich languages in our set (Chinese, Japanese, and the Indic languages), as discussed in Section~6.2; we therefore weight the neural and reference-free metrics more heavily. Third, the commercial systems (Google, Microsoft) are updated server-side without notice, so their outputs are reproducible only as frozen snapshots at the recorded run dates. Fourth, the evaluation uses a single corpus of software UI strings from one open-source project; results may not transfer to other domains or to longer text. Finally, IndicTrans2 covers only six of the twelve languages, so all cross-system comparisons involving it are restricted to the common Indic subset to avoid the averaging bias that unequal language coverage would otherwise introduce.
 
 \section{Conclusion and Future Work}
 
-This paper presents a comprehensive, AI-driven benchmarking study of NMT systems for multilingual interface localization in assistive technologies, IoT, and pervasive computing environments, using Google Translate as the industry-standard baseline and CometKiwi reference-free quality estimation for independent validation. Our evaluation of four NMT systems, two commercial and two open-source, across twelve language pairs using eight metrics on a fixed set of 10,228 authentic KDE software UI strings provides several key contributions to the artificial intelligence, assistive technology, and pervasive computing communities.
+This paper presents a comprehensive, AI-driven benchmarking study of NMT systems for multilingual interface localization in assistive technologies, IoT, and pervasive computing environments, using Google Translate as the industry-standard baseline and CometKiwi reference-free quality estimation for independent validation. Our evaluation of four alternative NMT systems, one commercial and three open-source, across twelve language pairs using eight metrics on a fixed set of 10,228 authentic KDE software UI strings provides several key contributions to the artificial intelligence, assistive technology, and pervasive computing communities.
 
 First, we demonstrate that the benchmarking-against-baseline methodology, validated by reference-free quality estimation, produces robust and consistent system rankings for software UI content. Second, we show that NMT system performance hierarchies differ between high-resource and low-resource language pairs, supporting language-aware routing strategies. Third, our analysis of UI string-type-specific challenges reveals that software content requires distinct evaluation approaches compared to standard news or web text.
 
-Future work will focus on: (1) extending the benchmark to LLM-based translation approaches (e.g., GPT-4, Gemini) as AI-driven alternatives to traditional NMT, and may additionally incorporate other NMT systems (e.g., DeepL) and large open multilingual models (e.g., MADLAD-400); (2) conducting human evaluation studies with assistive technology end-users to validate system rankings; (3) developing domain-specific NMT fine-tuning for assistive interface content; and (4) evaluating NMT quality in deployed IoT, pervasive computing, and smart home systems across multilingual user populations.
+Future work will focus on: (1) extending the benchmark to LLM-based translation approaches (e.g., GPT-4, Gemini) as AI-driven alternatives to traditional NMT; (2) conducting human evaluation studies with assistive technology end-users to validate system rankings; (3) developing domain-specific NMT fine-tuning for assistive interface content; and (4) evaluating NMT quality in deployed IoT, pervasive computing, and smart home systems across multilingual user populations.
 
 \begin{acks}
 The authors used AI-assisted tools for manuscript preparation, including text drafting and paraphrasing. All content was critically reviewed, verified for accuracy, and edited by the authors, who take full responsibility for the intellectual content and integrity of this work.
@@ -408,7 +408,7 @@ The author(s) declared no potential conflicts of interest with respect to the re
 The author(s) received no financial support for the research, authorship, and/or publication of this article.
 \end{funding}
 
-\noindent\textbf{Data Availability:} The KDE software UI strings originate from the KDE desktop environment, also distributed via the OPUS KDE4 collection at \url{https://opus.nlpl.eu/datasets/KDE4}. The fixed set of 10,228 source strings used in this study, all NMT system outputs, evaluation scripts, pinned dependency versions (\texttt{requirements-lock.txt} for NLLB-200 and \texttt{requirements-indictrans2.txt} for the IndicTrans2 environment), run-environment specification (\texttt{RUN\_ENVIRONMENT.md}), and reproducibility documentation (\texttt{REPRODUCIBILITY.md}) are available in the project repository at \url{https://github.com/Research-SoftwareLocalization/nmt-assistive-benchmarking}. Open-source model outputs (NLLB-200, IndicTrans2) are exactly reproducible under greedy decoding with the pinned versions; commercial-system outputs are retained as a frozen record of the translations produced on the recorded run dates.
+\noindent\textbf{Data Availability:} The KDE software UI strings originate from the KDE desktop environment, also distributed via the OPUS KDE4 collection at \url{https://opus.nlpl.eu/datasets/KDE4}. The fixed set of 10,228 source strings used in this study, all NMT system outputs, evaluation scripts, pinned dependency versions (\texttt{requirements-lock.txt} for NLLB-200, \texttt{requirements-madlad400.txt}, and \texttt{requirements-indictrans2.txt} for the IndicTrans2 environment), run-environment specification (\texttt{RUN\_ENVIRONMENT.md}), and reproducibility documentation (\texttt{REPRODUCIBILITY.md}) are available in the project repository at \url{https://github.com/Research-SoftwareLocalization/nmt-assistive-benchmarking}. Open-source model outputs are exactly reproducible under greedy decoding with the pinned versions; commercial-system outputs are retained as a frozen record of the translations produced on the recorded run dates.
 
 %%References (Vancouver numbered style, inline thebibliography)
 \begin{thebibliography}{99}
