@@ -11,14 +11,13 @@ A multi-metric AI-driven evaluation of Neural Machine Translation systems across
 
 ## Overview
 
-This study benchmarks 6 NMT systems against Google Translate as the industry-standard baseline across 12 language pairs (5 high-resource + 7 low-resource), using 8 evaluation metrics including CometKiwi reference-free quality estimation.
+This study benchmarks 5 NMT systems against Google Translate as the industry-standard baseline across 12 language pairs (5 high-resource + 7 low-resource), using 8 evaluation metrics including CometKiwi reference-free quality estimation.
 
 ### Evaluated NMT Systems
 
 | System | Type | Role |
 | --- | --- | --- |
 | Google Translate | Commercial | **Baseline** |
-| Amazon Translate | Commercial | Evaluated |
 | Microsoft Translator | Commercial | Evaluated |
 | NLLB-200 | Open-source | Evaluated (all 12 pairs) |
 | IndicTrans2 | Open-source | Evaluated (6 Indic pairs) |
@@ -43,3 +42,31 @@ This study benchmarks 6 NMT systems against Google Translate as the industry-sta
 | CometKiwi | **Reference-free** | Rei et al. (2022) |
 
 ## Repository Structure
+
+```text
+nmt-assistive-benchmarking/
+├── README.md                          # This file
+├── LICENSE                            # MIT License
+├── CITATION.cff                       # Citation metadata
+├── requirements.txt                   # Python dependencies
+├── data/
+│   ├── source/                        # KDE4 English source strings
+│   ├── baseline_google_translate/     # Google Translate outputs (12 languages)
+│   ├── microsoft_translator/          # Microsoft Translator outputs
+│   ├── nllb200/                       # NLLB-200 outputs
+│   ├── indictrans2/                   # IndicTrans2 outputs (6 Indic languages)
+│   └── madlad400/                     # MADLAD-400 outputs (12 languages)
+├── metrics/
+│   ├── results/                       # Computed metric scores
+│   └── cometkiwi/                     # Reference-free QE scores
+├── scripts/
+│   ├── translate_microsoft.py         # Microsoft Translator API script
+│   ├── translate_nllb200.py           # NLLB-200 inference script
+│   ├── translate_indictrans2.py       # IndicTrans2 inference script
+│   ├── translate_madlad400.py         # MADLAD-400 inference script
+│   ├── run_all_madlad400.py           # MADLAD-400 runner script
+│   ├── compute_metrics.py             # Compute all 7 reference-based metrics
+│   ├── compute_cometkiwi.py           # Compute CometKiwi reference-free scores
+│   └── analysis.py                    # Statistical analysis & visualization
+└── paper/
+    └── nmt_paper_jaise.tex            # LaTeX manuscript (SAGE template)
