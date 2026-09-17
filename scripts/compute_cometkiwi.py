@@ -7,7 +7,6 @@ of system rankings.
 
 Usage:
     python scripts/compute_cometkiwi.py --all
-    python scripts/compute_cometkiwi.py --system amazon_translate --lang de
 
 Requirements / environment notes:
     - Gated HF model: request access to Unbabel/wmt22-cometkiwi-da and
@@ -38,7 +37,6 @@ INDIC_LANGS = ['hi', 'bn', 'mr', 'pa', 'ta', 'te']
 # also gets an absolute-quality score here (not just used as a reference).
 ALL_SYSTEMS = [
     'baseline_google_translate',
-    'amazon_translate',
     'microsoft_translator',
     'nllb200',
     'indictrans2',

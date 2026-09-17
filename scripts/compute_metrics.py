@@ -5,7 +5,6 @@ Metrics: BLEU, METEOR, chrF++, ROUGE-L, TER, COMET, BERTScore
 Reference: Google Translate baseline output
 
 Usage:
-    python scripts/compute_metrics.py --system amazon_translate --lang de
     python scripts/compute_metrics.py --system nllb200 --lang all
     python scripts/compute_metrics.py --all
 """
@@ -33,7 +32,6 @@ LANGUAGES = {
 }
 ALL_LANGS = LANGUAGES['high_resource'] + LANGUAGES['low_resource']
 
-SYSTEMS = ['amazon_translate', 'microsoft_translator', 'nllb200', 'indictrans2', 'madlad400']
 INDIC_ONLY_SYSTEMS = ['indictrans2']
 INDIC_LANGS = ['hi', 'bn', 'mr', 'pa', 'ta', 'te']
 

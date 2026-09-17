@@ -29,15 +29,3 @@ cd095a9cd99450675a04500efcfd5f48  data/microsoft_translator/pa.txt
 914dbc5df28441eee67240af67a8c76f  data/microsoft_translator/ta.txt
 2a4ce45b5444479f09b43a64de3ca066  data/microsoft_translator/te.txt
 fe8c27d22ee28104e4a5b3e1e940dbce  data/microsoft_translator/zh.txt
-ae8d5086a895c834cb3df2c3cc6888e8  data/amazon_translate/ar.txt
-dc5e660cb33f9d2ec0421ad081415dbb  data/amazon_translate/bn.txt
-6d1a9945b35e460f0382c5baa08e82c3  data/amazon_translate/de.txt
-a11c890fc5400069e7134516772b9ba3  data/amazon_translate/es.txt
-db38231be727fbf52ca4765a53465879  data/amazon_translate/fr.txt
-2a4480adfa7f6e47eaa342ef26f2e54c  data/amazon_translate/hi.txt
-5cbd3eb5c8f2b7af1dc59e5b01d099f1  data/amazon_translate/ja.txt
-78aa1e0b63c3931af4b77cda5468b655  data/amazon_translate/mr.txt
-e21dbc042feabc2b5f54f364b1900978  data/amazon_translate/pa.txt
-a914f1dd4e8c9a66a3a7621b1cdb2011  data/amazon_translate/ta.txt
-65fc09bd979598e7da62046e4393f37d  data/amazon_translate/te.txt
-806675d9e889ada3b9e5cf7d130a5e69  data/amazon_translate/zh.txt

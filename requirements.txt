@@ -1,5 +1,4 @@
 # NMT Translation APIs
-boto3>=1.28.0            # Amazon Translate
 azure-ai-translation>=1.0.0  # Microsoft Translator
 
 # NMT Models (open-source)
