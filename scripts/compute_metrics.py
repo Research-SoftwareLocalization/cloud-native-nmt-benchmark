@@ -33,7 +33,7 @@ LANGUAGES = {
 }
 ALL_LANGS = LANGUAGES['high_resource'] + LANGUAGES['low_resource']
 
-SYSTEMS = ['amazon_translate', 'microsoft_translator', 'nllb200', 'indictrans2']
+SYSTEMS = ['amazon_translate', 'microsoft_translator', 'nllb200', 'indictrans2', 'madlad400']
 INDIC_ONLY_SYSTEMS = ['indictrans2']
 INDIC_LANGS = ['hi', 'bn', 'mr', 'pa', 'ta', 'te']
 
