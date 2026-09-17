@@ -25,6 +25,7 @@ data/baseline_google_translate/ta.txt
 data/baseline_google_translate/te.txt
 ```
 
+Same structure for: `microsoft_translator/`, `nllb200/`, `madlad400/`
 
 For `indictrans2/` (Indic languages only):
 ```
