@@ -42,6 +42,7 @@ ALL_SYSTEMS = [
     'microsoft_translator',
     'nllb200',
     'indictrans2',
+    'madlad400',
 ]
 INDIC_ONLY = ['indictrans2']
 
