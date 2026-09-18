@@ -125,7 +125,7 @@ If you use this work, please cite:
 ```bibtex
 @article{sharma2026benchmarking,
   title={Benchmarking neural machine translation for multilingual assistive technology interfaces: A multi-metric AI-driven evaluation across high-resource and low-resource languages},
-  author={Sharma, Neeraj Kumar and Mate, Pranav Dilip and Kalra, Ayush and Panda, Subhrakanta and Neti, Lalita Bhanu Murthy},
+  author={Sharma, Neeraj Kumar and Panda, Subhrakanta and Neti, Lalita Bhanu Murthy},
   journal={Journal of Ambient Intelligence and Smart Environments},
   year={2026},
   publisher={SAGE Publications}
