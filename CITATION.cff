@@ -13,6 +13,8 @@ authors:
   - family-names: Neti
     given-names: Lalita Bhanu Murthy
     affiliation: "BITS Pilani, Hyderabad Campus"
+doi: "10.5281/zenodo.23019912"
+url: "https://github.com/Research-SoftwareLocalization/cloud-native-nmt-benchmark"
 date-released: "2026-09-03"
 keywords:
   - neural machine translation
