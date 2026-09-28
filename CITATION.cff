@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this dataset or code, please cite the paper."
+title: "Benchmarking Neural Machine Translation for Cloud-Native Software Localization Pipelines: A Multi-Metric Evaluation Across High-Resource and Low-Resource Languages"
+type: dataset
+authors:
+  - family-names: Sharma
+    given-names: Neeraj Kumar
+    affiliation: "BITS Pilani, Hyderabad Campus"
+    orcid: ""
+  - family-names: Panda
+    given-names: Subhrakanta
+    affiliation: "BITS Pilani, Hyderabad Campus"
+  - family-names: Neti
+    given-names: Lalita Bhanu Murthy
+    affiliation: "BITS Pilani, Hyderabad Campus"
+date-released: "2026-09-03"
+keywords:
+  - neural machine translation
+  - assistive technology
+  - multilingual interfaces
+  - benchmarking
+  - low-resource languages
+  - COMET
+  - CometKiwi
+license: MIT

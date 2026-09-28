@@ -1,0 +1,27 @@
+# NMT Translation APIs
+azure-ai-translation>=1.0.0  # Microsoft Translator
+
+# NMT Models (open-source)
+transformers>=4.35.0     # HuggingFace Transformers (NLLB-200, IndicTrans2)
+torch>=2.0.0             # PyTorch
+sentencepiece>=0.1.99    # Tokenization for NLLB-200
+accelerate>=0.24.0       # Model loading optimization
+
+# Evaluation Metrics
+sacrebleu>=2.3.0         # BLEU, chrF++ (SacreBLEU)
+nltk>=3.8.0              # METEOR
+rouge-score>=0.1.2       # ROUGE-L
+unbabel-comet>=2.2.0     # COMET, CometKiwi
+bert-score>=0.3.13       # BERTScore
+pyter3>=0.3              # TER (Translation Edit Rate)
+
+# Data Processing & Analysis
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.11.0            # Bootstrap resampling, statistical tests
+matplotlib>=3.7.0        # Visualization
+seaborn>=0.12.0          # Heatmaps
+
+# Utilities
+tqdm>=4.65.0             # Progress bars
+python-dotenv>=1.0.0     # Environment variable management
