@@ -5,10 +5,9 @@ A multi-metric AI-driven evaluation of Neural Machine Translation systems across
 ## Paper
 
 **Title:** Benchmarking neural machine translation for multilingual assistive technology interfaces: A multi-metric AI-driven evaluation across high-resource and low-resource languages
-**Authors:** Neeraj Kumar Sharma, Pranav Dilip Mate, Ayush Kalra, Subhrakanta Panda, Lalita Bhanu Murthy Neti
+**Authors:** Neeraj Kumar Sharma, Subhrakanta Panda, Lalita Bhanu Murthy Neti
 **Affiliation:** BITS Pilani, Hyderabad Campus, India
-**Target Journal:** Journal of Ambient Intelligence and Smart Environments (JAISE), SAGE Publications
-
+**Target Journal:** Journal of Cloud Computing (Special Issue: Resilience-by-Design for Cloud-Native Systems)
 ## Overview
 
 This study benchmarks 4 NMT systems against Google Translate as the industry-standard baseline across 12 language pairs (5 high-resource + 7 low-resource), using 8 evaluation metrics including CometKiwi reference-free quality estimation.
