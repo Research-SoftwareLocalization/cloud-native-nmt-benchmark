@@ -68,8 +68,7 @@ nmt-assistive-benchmarking/
 │   ├── compute_metrics.py             # Compute all 7 reference-based metrics
 │   ├── compute_cometkiwi.py           # Compute CometKiwi reference-free scores
 │   └── analysis.py                    # Statistical analysis & visualization
-└── paper/
-    └── nmt_paper_jaise.tex            # LaTeX manuscript (SAGE template)
+└── main.tex                           # Springer Nature LaTeX Template - Journal
 ```
 
 ## Dataset
