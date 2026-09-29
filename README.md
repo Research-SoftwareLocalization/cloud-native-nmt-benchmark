@@ -44,31 +44,123 @@ This study benchmarks 4 NMT systems against Google Translate as the industry-sta
 ## Repository Structure
 
 ```text
-nmt-assistive-benchmarking/
-├── README.md                          # This file
-├── LICENSE                            # MIT License
-├── CITATION.cff                       # Citation metadata
-├── requirements.txt                   # Python dependencies
+cloud-native-nmt-benchmark-main/
+├── .gitignore
+├── CHECKSUMS.txt
+├── CITATION.cff
+├── DATA_LICENSE.md
+├── LICENSE
+├── README.md
+├── REPRODUCIBILITY.md
+├── RUN_ENVIRONMENT.md
+├── comet_by_system.png
 ├── data/
-│   ├── source/                        # KDE4 English source strings
-│   ├── baseline_google_translate/     # Google Translate outputs (12 languages)
-│   ├── microsoft_translator/          # Microsoft Translator outputs
-│   ├── nllb200/                       # NLLB-200 outputs
-│   ├── indictrans2/                   # IndicTrans2 outputs (6 Indic languages)
-│   └── madlad400/                     # MADLAD-400 outputs (12 languages)
+│   ├── README.md
+│   ├── baseline_google_translate/
+│   │   ├── ar.txt
+│   │   ├── bn.txt
+│   │   ├── de.txt
+│   │   ├── es.txt
+│   │   ├── fr.txt
+│   │   ├── hi.txt
+│   │   ├── ja.txt
+│   │   ├── mr.txt
+│   │   ├── pa.txt
+│   │   ├── ta.txt
+│   │   ├── te.txt
+│   │   └── zh.txt
+│   ├── indictrans2/
+│   │   ├── bn.txt
+│   │   ├── hi.txt
+│   │   ├── mr.txt
+│   │   ├── pa.txt
+│   │   ├── ta.txt
+│   │   └── te.txt
+│   ├── madlad400/
+│   │   ├── ar.txt
+│   │   ├── bn.txt
+│   │   ├── de.txt
+│   │   ├── es.txt
+│   │   ├── fr.txt
+│   │   ├── hi.txt
+│   │   ├── ja.txt
+│   │   ├── mr.txt
+│   │   ├── pa.txt
+│   │   ├── ta.txt
+│   │   ├── te.txt
+│   │   └── zh.txt
+│   ├── microsoft_translator/
+│   │   ├── ar.txt
+│   │   ├── bn.txt
+│   │   ├── de.txt
+│   │   ├── es.txt
+│   │   ├── fr.txt
+│   │   ├── hi.txt
+│   │   ├── ja.txt
+│   │   ├── mr.txt
+│   │   ├── pa.txt
+│   │   ├── ta.txt
+│   │   ├── te.txt
+│   │   └── zh.txt
+│   ├── nllb200/
+│   │   ├── ar.txt
+│   │   ├── bn.txt
+│   │   ├── de.txt
+│   │   ├── es.txt
+│   │   ├── fr.txt
+│   │   ├── hi.txt
+│   │   ├── ja.txt
+│   │   ├── mr.txt
+│   │   ├── pa.txt
+│   │   ├── ta.txt
+│   │   ├── te.txt
+│   │   └── zh.txt
+│   └── source/
+│       └── en.txt
+├── findings/
+│   └── bleu_comet_disagreements/
+│       ├── evaluate_bleu_comet_disagreements.py
+│       └── verified_metric_disagreements.csv
+├── main.pdf
+├── main.tex
+├── metric_correlation.png
 ├── metrics/
-│   ├── results/                       # Computed metric scores
-│   └── cometkiwi/                     # Reference-free QE scores
-├── scripts/
-│   ├── translate_microsoft.py         # Microsoft Translator API script
-│   ├── translate_nllb200.py           # NLLB-200 inference script
-│   ├── translate_indictrans2.py       # IndicTrans2 inference script
-│   ├── translate_madlad400.py         # MADLAD-400 inference script
-│   ├── run_all_madlad400.py           # MADLAD-400 runner script
-│   ├── compute_metrics.py             # Compute all 7 reference-based metrics
-│   ├── compute_cometkiwi.py           # Compute CometKiwi reference-free scores
-│   └── analysis.py                    # Statistical analysis & visualization
-└── main.tex                           # Springer Nature LaTeX Template - Journal
+│   ├── cometkiwi/
+│   │   ├── cometkiwi_pivot.csv
+│   │   └── cometkiwi_scores.csv
+│   └── results/
+│       ├── metric_scores.csv
+│       ├── metric_scores_lexical.csv
+│       ├── metric_scores_neural.csv
+│       └── pivots/
+│           ├── pivot_bertscore.csv
+│           ├── pivot_bleu.csv
+│           ├── pivot_chrf.csv
+│           ├── pivot_comet.csv
+│           ├── pivot_meteor.csv
+│           ├── pivot_rouge_l.csv
+│           └── pivot_ter.csv
+├── nmt_benchmarking_pipeline.ipynb
+├── requirements-indictrans2.txt
+├── requirements-lock.txt
+├── requirements-madlad400.txt
+├── requirements-metrics.txt
+├── requirements.txt
+└── scripts/
+    ├── analysis.py
+    ├── compute_cometkiwi.py
+    ├── compute_metrics.py
+    ├── make_pivots.py
+    ├── merge_metric_results.py
+    ├── remove_empty_lines.py
+    ├── run_all_indictrans2.py
+    ├── run_all_madlad400.py
+    ├── run_all_microsoft.py
+    ├── run_all_nllb200.py
+    ├── translate_indictrans2.py
+    ├── translate_madlad400.py
+    ├── translate_microsoft.py
+    └── translate_nllb200.py
 ```
 
 ## Dataset
