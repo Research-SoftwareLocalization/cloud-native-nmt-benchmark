@@ -4,7 +4,7 @@ A multi-metric AI-driven evaluation of Neural Machine Translation systems across
 
 ## Paper
 
-**Title:** Benchmarking neural machine translation for multilingual assistive technology interfaces: A multi-metric AI-driven evaluation across high-resource and low-resource languages
+**Title:** Benchmarking Neural Machine Translation for Cloud-Native Software Localization Pipelines: A Multi-Metric Evaluation Across High-Resource and Low-Resource Languages
 **Authors:** Neeraj Kumar Sharma, Subhrakanta Panda, Lalita Bhanu Murthy Neti
 **Affiliation:** BITS Pilani, Hyderabad Campus, India
 **Target Journal:** Journal of Cloud Computing (Special Issue: Resilience-by-Design for Cloud-Native Systems)
