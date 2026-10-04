@@ -39,6 +39,8 @@
 
 \section{Introduction}
 
+This section outlines the context, rationale, and scope of our benchmarking study on neural machine translation within cloud-native environments. We first explore the background and motivation, followed by an articulation of the research gaps and our core contributions, concluding with the structural organization of this paper.
+
 \subsection{Background and Motivation in Cloud Ecosystems}
 
 The convergence of cloud computing, pervasive IoT ecosystems, and artificial intelligence has produced a new generation of ubiquitous assistive technologies~\cite{1,2,3,4}. These platforms rely heavily on accurately localized multilingual interfaces to deliver accessible, human-centered services across distributed deployments.
@@ -68,6 +70,8 @@ The remainder of this paper is organized as follows. Section~2 reviews related w
 
 \section{Related Work}
 
+This section reviews the existing literature and foundational concepts relevant to our study. We examine the evolution of software localization methodologies, the application of neural machine translation to software content, the landscape of translation quality metrics, and the performance gap between high-resource and low-resource languages.
+
 \subsection{Software Localization Methodologies}
 
 Software localization has evolved from Waterfall models with sequential phases~\cite{11,12}, through Agile approaches integrating localization within sprint cycles~\cite{13,14}, to Continuous Localization integrated with CI/CD pipelines~\cite{5,6}. Recent advancements have further extended continuous localization into cloud-native and serverless architectures, enabling elastic scalability for multilingual software delivery pipelines~\cite{7}. The continuous model reduces timelines from over 30 days to approximately 24 hours through automation~\cite{15,16}, making automated NMT quality assessment essential for maintaining delivery velocity.
@@ -85,6 +89,8 @@ Translation quality metrics fall into string-based (BLEU~\cite{20}, METEOR~\cite
 The performance gap between high-resource and low-resource NMT remains significant~\cite{17,18}. High-resource pairs benefit from millions of parallel sentences, while low-resource pairs, particularly Indic languages (Hindi, Bengali, Marathi, Punjabi, Tamil, Telugu), have limited parallel data~\cite{17}. Strategies to bridge this gap include transfer learning, back-translation, and massive multilingual pretraining~\cite{17}. Understanding how various NMT systems perform relative to Google Translate across this resource spectrum is critical for assistive technology localization, where multilingual accessibility directly impacts the quality of human-centered services in smart environments.
 
 \section{Benchmarking Methodology}
+
+This section details the experimental setup and processes used to evaluate the NMT systems. It outlines the evaluation framework, the characteristics of our software UI string corpus, the rationale for language pair selection, the specific NMT systems evaluated, and the configuration details required for reproducibility.
 
 \subsection{Evaluation Framework}
 
@@ -152,22 +158,23 @@ Table~\ref{tab:systems} presents the NMT systems in our benchmarking study. Goog
 \begin{table}[h]
 \centering
 \caption{NMT systems in the benchmarking study.}\label{tab:systems}
-\begin{tabular}{@{}llllp{4cm}@{}}
+\footnotesize % Shrinks font to give columns breathing room
+\begin{tabularx}{\textwidth}{@{}llllX@{}} % Locks exact width to margins
 \toprule
 System & Role / Type & Architecture & Langs & Key Strength \\
 \midrule
-\rowcolor{blue!10} Google Translate & \textbf{BASELINE} / Commercial & Transformer & 130+ & Industry standard; broadest coverage \\
+Google Translate & \textbf{BASELINE} / Commercial & Transformer & 130+ & Industry standard; broadest coverage \\
 Microsoft Translator & Evaluated / Commercial & Transformer & 100+ & Azure ecosystem integration \\
 NLLB-200 & Evaluated / Open-source & MoE Transformer & 200 & Low-resource language focus \\
 MADLAD-400 & Evaluated / Open-source & T5-based Transformer & 400+ & High-quality multilingual coverage \\
 IndicTrans2~\cite{30} & Evaluated / Open-source & Transformer & 22 Indic & State-of-art for Indic languages \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{System Configuration and Reproducibility}
 
-The three open-source systems were run locally to ensure reproducibility. NLLB-200 used the \texttt{facebook/nllb-200-distilled-600M} checkpoint via the Hugging Face Transformers library (v5.16.1), with greedy decoding (\texttt{num\_beams}=1, the model default), a tokenizer input truncation length of 512, and a batch size of 32. MADLAD-400 used the \texttt{google/madlad400-3b-mt} checkpoint with float16 precision, a batch size of 16, and explicit greedy decoding to prevent out-of-memory errors on standard GPUs. IndicTrans2 used the \texttt{ai4bharat/indictrans2-en-indic-1B} checkpoint for the six Indic pairs (hi, bn, mr, pa, ta, te), with the same greedy decoding, a maximum of 256 generated tokens, and a batch size of 32, applying the IndicTransToolkit \texttt{IndicProcessor} for script normalization. All open-source systems use deterministic greedy decoding, ensuring output is exactly reproducible given the pinned software versions in the repository. The commercial system (Microsoft Translator) was accessed via the Azure AI Translator API (version 3.0) on 6 September 2026. As this commercial model is updated server-side without notice, the corresponding output files are retained as a frozen record. Complete environment specifications, pinned dependency versions, driver scripts, and all system outputs are provided in the accompanying repository (see Data Availability).
+The three open-source systems were run locally to ensure reproducibility. NLLB-200 used the \texttt{facebook/nllb-200-distilled-600M} checkpoint via the Hugging Face Transformers library (v5.16.1), with greedy decoding (\texttt{num\_beams}=1, the model default), a tokenizer input truncation length of 512, and a batch size of 32. MADLAD-400 used the \texttt{google/madlad400-3b-mt} checkpoint with float16 precision, a batch size of 16, and explicit greedy decoding to prevent out-of-memory errors on standard GPUs. IndicTrans2 used the \texttt{ai4bharat/indictrans2-en-indic-1B} checkpoint for the six Indic pairs (hi, bn, mr, pa, ta, te), with the same greedy decoding, a maximum of 256 generated tokens, and a batch size of 32, applying the IndicTransToolkit \texttt{IndicProcessor} for script normalization. All open-source systems use deterministic greedy decoding, ensuring output is exactly reproducible given the pinned software versions in the repository. The commercial system (Microsoft Translator) was accessed via the Azure AI Translator API (version 3.0) on 6 September 2026. As this commercial model is updated server-side without notice, the corresponding output files are retained as a frozen record. Complete environment specifications, pinned dependency versions, driver scripts, and all system outputs are available from the corresponding author upon reasonable request.
 
 \section{Evaluation Metrics}
 
@@ -187,7 +194,7 @@ ROUGE-L~\cite{23} & Reference-based & Longest common subsequence F-score & 0--10
 TER~\cite{24} & Reference-based & Minimum edit operations / reference length & 0--$\infty$ & Lower $\downarrow$ \\
 COMET~\cite{25} & Reference-based & Fine-tuned XLM-RoBERTa on human judgment data & 0--1 & Higher $\uparrow$ \\
 BERTScore~\cite{26} & Reference-based & Token-level cosine similarity via BERT embeddings & 0--1 & Higher $\uparrow$ \\
-\rowcolor{orange!15} CometKiwi~\cite{28} & \textbf{Ref-FREE} & Quality estimation from source + hypothesis only & 0--1 & Higher $\uparrow$ \\
+\rowcolor{white!15} CometKiwi~\cite{28} & \textbf{Ref-FREE} & Quality estimation from source + hypothesis only & 0--1 & Higher $\uparrow$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -195,6 +202,8 @@ BERTScore~\cite{26} & Reference-based & Token-level cosine similarity via BERT e
 The reference-based metrics measure agreement between each evaluated system's output and the Google Translate baseline. Importantly, CometKiwi operates independently of any reference, evaluating absolute translation quality using only the source text and hypothesis. This enables us to validate whether systems that deviate from Google Translate do so because they produce better or worse translations.
 
 \section{Experimental Results}
+
+This section presents the findings from our benchmarking experiments. We begin with a summary of the dataset statistics, followed by a detailed breakdown of NMT performance across both high-resource and low-resource language pairs, reference-free validation scores, and a targeted analysis of string-type challenges.
 
 \subsection{Dataset Statistics}
 
@@ -227,7 +236,9 @@ Table~\ref{tab:high} reports mean scores across the five high-resource pairs (EN
 \begin{table}[h]
 \centering
 \caption{High-resource results, mean over EN-DE, EN-FR, EN-ZH, EN-ES, EN-JA. Reference-based metrics measure agreement with the Google Translate baseline (higher is more similar, except TER where lower is closer). COMET, BERTScore, and CometKiwi are 0--1.}\label{tab:high}
-\begin{tabular}{@{}lcccccccc@{}}
+\tiny % Ultra-compact font size to guarantee everything fits within margins
+\setlength{\tabcolsep}{2pt} % Minimizes inter-column padding to prevent overflow
+\begin{tabular}{@{} p{2.2cm} c c c c c c c c @{}} 
 \toprule
 System & BLEU & METEOR & chrF++ & ROUGE-L & TER$\downarrow$ & COMET & BERTScore & CometKiwi \\
 \midrule
@@ -247,13 +258,15 @@ Table~\ref{tab:low} reports mean scores across the seven low-resource pairs (EN-
 \begin{table}[h]
 \centering
 \caption{Low-resource results, mean over EN-HI, EN-AR, EN-BN, EN-MR, EN-PA, EN-TA, EN-TE. Reference-based metrics measure agreement with the Google Translate baseline.}\label{tab:low}
-\begin{tabular}{@{}lcccccccc@{}}
+\tiny % Step font size down to tiny
+\setlength{\tabcolsep}{2pt} % Shrink invisible padding between columns
+\begin{tabular}{@{} p{2.2cm} c c c c c c c c @{}} % Fixed, compact width for column 1
 \toprule
 System & BLEU & METEOR & chrF++ & ROUGE-L & TER$\downarrow$ & COMET & BERTScore & CometKiwi \\
 \midrule
 Microsoft Translator & \textbf{46.0} & \textbf{50.3} & \textbf{67.5} & \textbf{11.0} & \textbf{42.2} & \textbf{0.890} & \textbf{0.923} & 0.793 \\
 NLLB-200 & 38.2 & 43.0 & 58.2 & 10.9 & 51.1 & 0.871 & 0.904 & 0.790 \\
-MADLAD-400 & 28.6 & 29.9 & 46.4 & 10.7 & 68.0 & 0.818 & 0.870 & 0.769 \\
+MADLAD-400 & 28.6 & 29.7 & 46.4 & 10.7 & 68.0 & 0.818 & 0.870 & 0.769 \\
 IndicTrans2\footnotemark[1] & 33.9 & 39.5 & 57.0 & 8.2 & 58.4 & 0.861 & 0.897 & \textbf{0.798} \\
 \bottomrule
 \end{tabular}
@@ -269,7 +282,9 @@ Tables~\ref{tab:comet_lang} and~\ref{tab:chrf_lang} report per-language detail b
 \begin{table}[h]
 \centering
 \caption{COMET by language (higher is better). Reference: Google Translate baseline.}\label{tab:comet_lang}
-\begin{tabular}{@{}lcccccccccccc@{}}
+\tiny % Ultra-compact font size required to fit 13 columns
+\setlength{\tabcolsep}{1.5pt} % Minimal inter-column padding to prevent margin overflow
+\begin{tabular}{@{} p{1.8cm} c c c c c c c c c c c c @{}}
 \toprule
 System & de & fr & zh & es & ja & hi & ar & bn & mr & pa & ta & te \\
 \midrule
@@ -284,7 +299,9 @@ IndicTrans2 & -- & -- & -- & -- & -- & 0.830 & -- & 0.892 & 0.792 & 0.867 & 0.89
 \begin{table}[h]
 \centering
 \caption{chrF++ by language (higher is more similar to the Google Translate baseline).}\label{tab:chrf_lang}
-\begin{tabular}{@{}lcccccccccccc@{}}
+\tiny % Ultra-compact font size to fit 13 columns within margins
+\setlength{\tabcolsep}{1.5pt} % Minimal inter-column padding
+\begin{tabular}{@{} p{1.8cm} c c c c c c c c c c c c @{}}
 \toprule
 System & de & fr & zh & es & ja & hi & ar & bn & mr & pa & ta & te \\
 \midrule
@@ -319,7 +336,7 @@ System & CometKiwi \\
 Google Translate & \textbf{0.803} \\
 Microsoft Translator & 0.799 \\
 IndicTrans2 & 0.798 \\
-NLLB-200 & 0.797 \\
+NLLB-200 & 0.796 \\
 MADLAD-400 & 0.772 \\
 \bottomrule
 \end{tabular}
@@ -330,7 +347,9 @@ On this like-for-like comparison the top four systems are closely bunched (0.797
 \begin{table}[h]
 \centering
 \caption{CometKiwi (reference-free) by language, including the Google Translate baseline as an evaluated system. Higher is better. Cross-system comparison is valid only on the six Indic pairs that all five systems cover.}\label{tab:cometkiwi_lang}
-\begin{tabular}{@{}lcccccccccccc@{}}
+\tiny % Ultra-compact font size to fit 13 columns within margins
+\setlength{\tabcolsep}{1.5pt} % Minimal inter-column padding
+\begin{tabular}{@{} p{1.8cm} c c c c c c c c c c c c @{}}
 \toprule
 System & de & fr & zh & es & ja & hi & ar & bn & mr & pa & ta & te \\
 \midrule
@@ -353,6 +372,8 @@ To understand the practical impact of translation failures on assistive technolo
 
 \section{Discussion}
 
+This section interprets the experimental results and explores their broader implications. We analyze system selection strategies, the reliability of various metrics for short software UI content, the agreement among these metrics, and actionable recommendations for localization pipeline design.
+
 \subsection{System Selection Implications}
 
 Our benchmarking results have direct implications for AI-driven NMT system selection in localization pipelines serving assistive technologies, IoT platforms, and pervasive computing systems. For high-resource European language pairs, commercial systems (Microsoft Translator) and robust multilingual open-source models (MADLAD-400) are expected to closely match or exceed Google Translate quality. For low-resource Indic languages, specialized open-source models (NLLB-200, IndicTrans2) deliver strong alternatives to commercial platforms, suggesting that assistive technology and IoT platforms should implement AI-driven, language-aware routing rather than defaulting to a single NMT provider. This finding is particularly significant for pervasive computing systems deployed in multilingual households, healthcare facilities, and community settings.
@@ -369,7 +390,7 @@ In our results the reference-free CometKiwi rankings are consistent with the ref
 
 \subsection{Agreement Among Metrics}
 
-To quantify how consistently the eight metrics rank system-language pairs, we computed pairwise Kendall's $\tau$ rank correlations across all evaluated pairs (TER sign-inverted so that higher is better for every metric). The metrics are broadly concordant but far from redundant. Character- and word-overlap metrics correlate most strongly with one another (chrF++ vs. METEOR $\tau=0.70$; chrF++ vs. TER $\tau=0.69$; METEOR vs. TER $\tau=0.77$), confirming that they capture a common surface-similarity signal. The two neural metrics agree moderately (COMET vs. BERTScore $\tau=0.57$), and COMET correlates only weakly-to-moderately with the purely lexical metrics (COMET vs. BLEU $\tau=0.43$; COMET vs. chrF++ $\tau=0.45$), indicating that the neural metrics measure something the surface metrics do not. As Figure~\ref{fig:corr} shows, ROUGE-L is the outlier, correlating weakly with everything ($\tau \leq 0.41$), consistent with its instability on the short, morphologically rich strings in this corpus. These correlations support using neural metrics as the primary basis for comparison while retaining lexical metrics for their sensitivity to literal artifact preservation.
+To quantify how consistently the eight metrics rank system-language pairs, we computed pairwise Kendall's $\tau$ rank correlations across all evaluated pairs (TER sign-inverted so that higher is better for every metric). The metrics are broadly concordant but far from redundant. Character- and word-overlap metrics correlate most strongly with one another (chrF++ vs. METEOR $\tau=0.73$; chrF++ vs. TER $\tau=0.75$; METEOR vs. TER $\tau=0.79$), confirming that they capture a common surface-similarity signal. The two neural metrics agree moderately (COMET vs. BERTScore $\tau=0.61$), and COMET correlates only weakly-to-moderately with the purely lexical metrics (COMET vs. BLEU $\tau=0.49$; COMET vs. chrF++ $\tau=0.50$), indicating that the neural metrics measure something the surface metrics do not. As Figure~\ref{fig:corr} shows, ROUGE-L is the outlier, correlating weakly with everything ($\tau \leq 0.41$), consistent with its instability on the short, morphologically rich strings in this corpus. These correlations support using neural metrics as the primary basis for comparison while retaining lexical metrics for their sensitivity to literal artifact preservation.
 
 \begin{figure}[h]
 \centering
@@ -391,7 +412,7 @@ Based on our evaluation, we provide the following recommendations for AI-powered
 
 \subsection{Reproducibility}
 
-To support independent verification, the complete study artifacts are released in the project repository: the fixed set of 10,228 source strings, every system's translation outputs, all evaluation scripts, the computed metric scores, and per-metric result tables. Reproducibility is anchored on pinned software environments rather than a specific machine. The open-source translation systems use deterministic greedy decoding and are pinned via \texttt{requirements-lock.txt} (NLLB-200), \texttt{requirements-madlad400.txt} (MADLAD-400), and \texttt{requirements-indictrans2.txt} (IndicTrans2); the metric computation environment is pinned via \texttt{requirements-metrics.txt}. Because the open models require mutually incompatible library versions, they are documented as separate environments. Model provenance is recorded by Hugging Face commit revision for the open models, and by API access date for the commercial systems, whose server-side models are not version-controllable and whose outputs are therefore retained as frozen snapshots. Byte-level integrity of every released output file is verifiable against published MD5 and SHA-256 checksums. Crucially, all text assets, scripts, and translation outputs strictly utilize Unix \texttt{LF} line endings to ensure cryptographic checksums match across operating systems without \texttt{CRLF} discrepancies. Two of the neural metric models (COMET and CometKiwi) are gated and require access approval, which we note so that reproduction expectations are set accurately.
+To support independent verification, the complete study artifacts (including the fixed set of 10,228 source strings, every system's translation outputs, all evaluation scripts, the computed metric scores, and per-metric result tables) are available upon request. Reproducibility is anchored on pinned software environments rather than a specific machine. The open-source translation systems use deterministic greedy decoding and are pinned via \texttt{requirements-lock.txt} (NLLB-200), \texttt{requirements-madlad400.txt} (MADLAD-400), and \texttt{requirements-indictrans2.txt} (IndicTrans2); the metric computation environment is pinned via \texttt{requirements-metrics.txt}. Because the open models require mutually incompatible library versions, they are documented as separate environments. Model provenance is recorded by Hugging Face commit revision for the open models, and by API access date for the commercial systems, whose server-side models are not version-controllable and whose outputs are therefore retained as frozen snapshots. Byte-level integrity of every released output file is verifiable against published MD5 and SHA-256 checksums. Crucially, all text assets, scripts, and translation outputs strictly utilize Unix \texttt{LF} line endings to ensure cryptographic checksums match across operating systems without \texttt{CRLF} discrepancies. Two of the neural metric models (COMET and CometKiwi) are gated and require access approval, which we note so that reproduction expectations are set accurately.
 
 \subsection{Threats to Validity}
 
@@ -416,10 +437,10 @@ The authors used AI-assisted tools for manuscript preparation, including text dr
 \begin{itemize}
 \item \textbf{Funding:} The author(s) received no financial support for the research, authorship, and/or publication of this article.
 \item \textbf{Conflict of interest/Competing interests:} The author(s) declared no potential conflicts of interest with respect to the research, authorship, and/or publication of this article.
-\item \textbf{Data availability:} The KDE software UI strings originate from the KDE desktop environment, also distributed via the OPUS KDE4 collection at \url{https://opus.nlpl.eu/datasets/KDE4}. The fixed set of 10,228 source strings used in this study, all NMT system outputs, evaluation scripts, pinned dependency versions, run-environment specification, and reproducibility documentation are permanently archived in Zenodo under DOI \url{https://doi.org/10.5281/zenodo.23019912}, with the active repository and cryptographic checksums hosted at \url{https://github.com/Research-SoftwareLocalization/cloud-native-nmt-benchmark}.
-\item \textbf{Author contribution:} All authors contributed to the conception and design of the study, the development and evaluation of the benchmarking methodology, and the analysis and interpretation of the results. All authors read, revised, and approved the final manuscript.
-\end{itemize}
 
+\item \textbf{Data availability:} The datasets generated and analyzed during the current study, including the KDE software UI strings, NMT system outputs, evaluation scripts, pinned dependency versions, and run-environment specifications, are available from the corresponding author on request.
+\item \textbf{Author contribution:} N.K.S. conducted the experiments, performed the formal analysis, and wrote the original manuscript draft. S.P. and L.B.M.N. supervised the research, contributed to the conceptualization and design of the study, and provided methodology guidance. All authors reviewed and edited the final manuscript.
+\end{itemize} %
 \begin{thebibliography}{99}
 
 \bibitem{1}
