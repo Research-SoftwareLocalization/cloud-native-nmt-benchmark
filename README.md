@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1392816691.svg)](https://doi.org/10.5281/zenodo.23021740)
+
 # Benchmarking NMT for Multilingual Assistive Technology Interfaces
 
 A multi-metric AI-driven evaluation of Neural Machine Translation systems across high-resource and low-resource languages, using the OPUS KDE4 parallel corpus.
