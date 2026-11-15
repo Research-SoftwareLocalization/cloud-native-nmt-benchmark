@@ -6,20 +6,23 @@ authors:
   - family-names: Sharma
     given-names: Neeraj Kumar
     affiliation: "BITS Pilani, Hyderabad Campus"
-    orcid: ""
   - family-names: Panda
     given-names: Subhrakanta
     affiliation: "BITS Pilani, Hyderabad Campus"
   - family-names: Neti
     given-names: Lalita Bhanu Murthy
     affiliation: "BITS Pilani, Hyderabad Campus"
+repository-code: "[https://github.com/Research-SoftwareLocalization/cloud-native-nmt-benchmark](https://github.com/Research-SoftwareLocalization/cloud-native-nmt-benchmark)"
+doi: "10.5281/zenodo.23019912"
 date-released: "2026-09-03"
 keywords:
+  - cloud computing
+  - cloud-native localization
   - neural machine translation
-  - assistive technology
-  - multilingual interfaces
+  - CI/CD pipelines
+  - serverless architectures
+  - multilingual software delivery
   - benchmarking
-  - low-resource languages
   - COMET
   - CometKiwi
 license: MIT

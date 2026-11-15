@@ -10,7 +10,7 @@ This repository contains the source strings, translation outputs, scripts, and e
 4. IndicTrans2 outputs: `data/indictrans2/{lang}.txt` (6 Indic languages)
 5. MADLAD-400 outputs: `data/madlad400/{lang}.txt`
 6. Microsoft Translator outputs: `data/microsoft_translator/{lang}.txt`
-7. Metrics: computed by `scripts/compute_metrics.py`
+7. Metrics: computed by `scripts/compute_metrics.py` and `scripts/compute_cometkiwi.py`
 
 ## Target languages (12)
 
@@ -46,7 +46,7 @@ python scripts/run_all_nllb200.py
 IndicTrans2 requires a separate environment and gated-model access:
 
 ```bash
-pip install "transformers==4.46.1" IndicTransToolkit sentencepiece
+pip install -r requirements-indictrans2.txt
 python scripts/run_all_indictrans2.py
 ```
 
@@ -72,8 +72,18 @@ pip install requests tqdm
 python scripts/run_all_microsoft.py
 ```
 
+## Checksum Verification
+
+All text assets, scripts, and translation outputs strictly use Unix LF (`\n`) line endings. Verify byte-level integrity using either SHA-256 or MD5:
+
+```bash
+sha256sum -c CHECKSUMS.txt
+sha256sum -c CHECKSUMS_SHA256.txt
+md5sum -c CHECKSUMS_MD5.txt
+```
+
 ## Notes on reproducibility
 
 - Open-source models (NLLB-200, IndicTrans2, MADLAD-400) with greedy decoding are deterministic: identical inputs and pinned versions yield identical outputs.
-- IndicTrans2 is a gated Hugging Face repository; reproduction requires requesting access and authenticating with a Hugging Face read token.
+- IndicTrans2 (`ai4bharat/indictrans2-en-indic-1B`) and the neural metric checkpoints (`Unbabel/wmt22-comet-da`, `Unbabel/wmt22-cometkiwi-da`) are gated Hugging Face repositories; reproduction requires requesting access and authenticating with a Hugging Face read token.
 - Commercial systems (Google, Microsoft) update server-side without notice; their output files in this repository are the frozen record of what those systems produced on the recorded run dates.
