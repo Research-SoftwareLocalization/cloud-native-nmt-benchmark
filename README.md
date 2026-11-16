@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23019912.svg)](https://doi.org/10.5281/zenodo.23019912)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24270498.svg)](https://doi.org/10.5281/zenodo.24270498)
 
 # Benchmarking Neural Machine Translation for Cloud-Native Software Localization Pipelines
 
@@ -137,6 +137,6 @@ If you use this dataset or code, please cite:
   journal={Journal of Cloud Computing},
   year={2026},
   publisher={Springer Nature},
-  doi={10.5281/zenodo.23019912}
+  doi={10.5281/zenodo.24270498}
 }
 ```
