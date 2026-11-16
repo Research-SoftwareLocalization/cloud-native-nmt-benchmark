@@ -3,10 +3,10 @@
 ## Source strings
 The 10,228 English source UI strings used in this study originate from the KDE
 desktop environment's localization files, as collected and distributed through the
-OPUS KDE4 corpus (Tiedemann, 2012; [https://opus.nlpl.eu/datasets/KDE4](https://opus.nlpl.eu/datasets/KDE4)). KDE software
+OPUS KDE4 corpus (Tiedemann, 2012; https://opus.nlpl.eu/datasets/KDE4). KDE software
 and its associated translation catalogs are distributed predominantly under the GNU
 GPL and LGPL licenses. Users reusing these strings should consult the KDE licensing
-terms ([https://community.kde.org/Policies/Licensing_Policy](https://community.kde.org/Policies/Licensing_Policy)) and the OPUS terms of use
+terms (https://community.kde.org/Policies/Licensing_Policy) and the OPUS terms of use
 to confirm the exact conditions that apply to their use case.
 
 ## Translation outputs

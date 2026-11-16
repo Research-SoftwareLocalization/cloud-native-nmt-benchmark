@@ -83,7 +83,7 @@ cloud-native-nmt-benchmark/
 
 ## Dataset
 
-- **Source:** OPUS KDE4 parallel corpus (v.2) — [https://opus.nlpl.eu/datasets/KDE4](https://opus.nlpl.eu/datasets/KDE4)
+- **Source:** OPUS KDE4 parallel corpus (v.2) — https://opus.nlpl.eu/datasets/KDE4
 - **Corpus citation:** Tiedemann, J. (2012). Parallel Data, Tools and Interfaces in OPUS. *Proceedings of LREC 2012*.
 - **Size:** 10,228 English software UI strings (`data/source/en.txt`)
 - **Baseline:** Google Translate outputs generated on 3 September 2026 via `GOOGLETRANSLATE()` in Google Sheets
@@ -92,7 +92,7 @@ cloud-native-nmt-benchmark/
 
 ```bash
 # Clone the repository
-git clone [https://github.com/Research-SoftwareLocalization/cloud-native-nmt-benchmark.git](https://github.com/Research-SoftwareLocalization/cloud-native-nmt-benchmark.git)
+git clone https://github.com/Research-SoftwareLocalization/cloud-native-nmt-benchmark.git
 cd cloud-native-nmt-benchmark
 
 # Verify corpus and translation output checksums
